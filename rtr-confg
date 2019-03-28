@@ -1,0 +1,139 @@
+
+!
+! Last configuration change at 00:21:58 UTC Thu Jan 1 1970
+!
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname RTR
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+memory-size iomem 20
+dot11 syslog
+ip source-route
+!
+!
+!
+!
+!
+ip cef
+ip domain name TRM.ORG
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+voice-card 0
+!
+crypto pki token default removal timeout 0
+!
+!
+!
+!
+license udi pid CISCO2801 sn FCZ121211W5
+username admin privilege 15 password 0 admin
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.1.250 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/0.3
+ encapsulation dot1Q 3
+ ip address 192.168.13.250 255.255.255.0
+!
+interface FastEthernet0/1
+ ip address 192.168.2.250 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Serial0/3/0
+ no ip address
+ shutdown
+ no fair-queue
+ clock rate 2000000
+!
+interface Serial0/3/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip route 0.0.0.0 0.0.0.0 192.168.13.254
+!
+logging esm config
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+voice-port 0/0/0
+!
+voice-port 0/0/1
+!
+voice-port 0/0/2
+!
+voice-port 0/0/3
+!
+!
+!
+mgcp profile default
+!
+!
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 10
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+end
